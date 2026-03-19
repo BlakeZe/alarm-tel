@@ -1,0 +1,8 @@
+services:
+  alarm-tel:                        
+    build: .                        #contrucción de la imagen a partir del Dockerfile
+    restart: unless-stopped         # se reinicia solo 
+    env_file:
+      - .env                        # tokens de .env
+    volumes:
+      - ./data:/app/data            # carpeta compartida para la base de datos
