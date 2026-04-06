@@ -45,4 +45,4 @@ async def monitor_precios(bot: Bot):
             except Exception as e:
                 print(f"Error consultando {moneda}: {e}")
 
-        await asyncio.sleep(30)
+        await asyncio.sleep(10)
