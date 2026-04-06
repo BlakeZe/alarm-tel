@@ -12,6 +12,14 @@ from binance_client import obtener_precio
 TEL_TOKEN = os.getenv("TEL_TOKEN")
 
 
+
+#Corrección de decimales dependiendo del precio de la moneda
+def formatear_precio(precio: float) -> str:
+    if precio >= 1:
+        return f"{precio:,.2f}$"
+    else:
+        return f"{precio:.6f}$"
+    
 # ─────────────────────────────────────────
 # COMANDOS DEL BOT
 # ─────────────────────────────────────────
@@ -88,7 +96,7 @@ async def precio(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if isinstance(resultado, Exception):
                 lineas.append(f"• {moneda}: error al consultar")
             else:
-                lineas.append(f"• {moneda}: {resultado:,.2f}$")
+                lineas.append(f"• {moneda}: {formatear_precio(resultado)}")
 
         mensaje = "💰 Tu watchlist:\n\n" + "\n".join(lineas)
         await update.message.reply_text(mensaje)
